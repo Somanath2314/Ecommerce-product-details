@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors'
 import loginroutes from './src/routes/loginroutes.js'
 import cookieParser from 'cookie-parser';
+import user from './src/routes/user.js'
 
 dotenv.config({
     path:"./.env"
@@ -23,7 +24,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended:true,limit:"1000kb"}))
 app.use(express.static("public"))
 
-app.use("/api/v1",loginroutes)
+app.use("/api/v1",loginroutes) 
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

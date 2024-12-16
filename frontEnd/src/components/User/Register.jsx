@@ -49,7 +49,9 @@ function Register() {
           'Content-Type': 'application/json'
         }
       });
-      alert(res.data.message);
+      alert(res.data);
+      console.log(res.data);
+      
     } catch (error) {
       console.log("some problem while registering", error);      
     }

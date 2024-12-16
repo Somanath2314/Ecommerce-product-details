@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.1",
+    "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.8",
     "daisyui": "^4.12.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.0.1",
     "router-dom": "^3.0.1"
   },

@@ -8,6 +8,8 @@ import AdminSection from './components/AdminSection/AdminSection.jsx'
 import Register from './components/User/Register.jsx'
 import Login from './components/User/Login.jsx'
 import Layout from './Layout.jsx'
+import { Provider } from 'react-redux'
+import {store} from './app/store.js'
 import "./index.css"
 
 // Components i need
@@ -39,6 +41,8 @@ const router = new createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode> 
-        <RouterProvider router={router} /> 
+        <Provider store={store}>
+        <RouterProvider router={router} />
+        </Provider> 
     </React.StrictMode>,
   )
