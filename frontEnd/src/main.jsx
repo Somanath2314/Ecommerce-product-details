@@ -10,6 +10,7 @@ import Login from './components/User/Login.jsx'
 import Layout from './Layout.jsx'
 import { Provider } from 'react-redux'
 import {store} from './app/store.js'
+import { ToastContainer } from 'react-toastify'
 import "./index.css"
 
 // Components i need

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 import axios from "axios";
-import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome styles
+import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome styles 
 
 function Register() {
   const [formValues, setFormValues] = useState({
@@ -9,6 +10,8 @@ function Register() {
     email: "",
     password: "",
     confirmPassword: "",
+    userType: "user", // Default is user
+    adminPassword: "", // Admin password (if selected)
   });
 
   const [passwordMatch, setPasswordMatch] = useState(null); // null = no input, true = match, false = mismatch.
@@ -32,28 +35,44 @@ function Register() {
     e.preventDefault();
     console.log("Form Submitted", formValues);
 
-    // Validate passwords match before proceeding
     if (formValues.password !== formValues.confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
+
+    if (formValues.userType === "admin" && !formValues.adminPassword) {
+      toast.error("Admin password is required!");
+      return;
+    }
+
     try {
-        const res = await axios.post("http://localhost:3000/api/v1/register", {
-        name: formValues.name,
-        email: formValues.email,
-        password: formValues.password
-      },
-      {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json'
+      const res = await axios.post(
+        "http://localhost:3000/api/v1/register",
+        {
+          name: formValues.name,
+          email: formValues.email,
+          password: formValues.password,
+          userType: formValues.userType,
+          adminPassword: formValues.adminPassword,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
-      alert(res.data);
+      );
+
+      toast.success(res.data.message); // Show success message in toast
       console.log(res.data);
-      
     } catch (error) {
-      console.log("some problem while registering", error);      
+      if (error.response) {
+        console.error("Backend error:", error.response.data);
+        toast.error(error.response.data.message || "An error occurred during registration.");
+      } else {
+        console.error("Error during registration:", error);
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
@@ -140,6 +159,43 @@ function Register() {
               <p className="text-green-500 text-sm mt-1">Passwords match</p>
             )}
           </div>
+
+          {/* Dropdown for user type selection */}
+          <div>
+            <label htmlFor="userType" className="block text-sm font-medium">
+              Account Type
+            </label>
+            <select
+              name="userType"
+              id="userType"
+              value={formValues.userType}
+              onChange={handleChange}
+              className="mt-1 block w-full px-4 py-2 border border-gray-700 bg-gray-900 rounded-lg text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          {/* Conditionally render admin password input */}
+          {formValues.userType === "admin" && (
+            <div>
+              <label htmlFor="adminPassword" className="block text-sm font-medium">
+                Admin Password
+              </label>
+              <input
+                type="password"
+                name="adminPassword"
+                id="adminPassword"
+                placeholder="Enter admin password"
+                value={formValues.adminPassword}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full px-4 py-2 border border-gray-700 bg-gray-900 rounded-lg text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          )}
+
           <button
             type="submit"
             className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -147,12 +203,17 @@ function Register() {
             Register
           </button>
         </form>
-        <div class="flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <p className="text-sm text-gray-600 mt-2">
-          Already registered? <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
+            Already registered?{" "}
+            <Link to="/login" className="text-blue-500 hover:underline">
+              Login
+            </Link>
           </p>
         </div>
       </div>
+      {/* Add the ToastContainer to display the toast notifications */}
+      <ToastContainer />
     </div>
   );
 }

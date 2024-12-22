@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors'
 import loginroutes from './src/routes/loginroutes.js'
+import apiRoutes from './src/routes/apiRoutes.js'
 import cookieParser from 'cookie-parser';
 import user from './src/routes/user.js'
 
@@ -25,7 +26,7 @@ app.use(express.urlencoded({extended:true,limit:"1000kb"}))
 app.use(express.static("public"))
 
 app.use("/api/v1",loginroutes) 
-
+app.use("/api/v1",apiRoutes) 
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
