@@ -9,6 +9,24 @@ A comprehensive MERN stack application providing streamlined access to e-commerc
 - **MongoDB Integration**: Efficient data storage and retrieval
 - **Comprehensive Documentation**: Detailed API documentation for developers
 
+## System Architecture
+
+### JWT Authentication Workflow
+<div style="padding: 20px; border: 2px solid #3498db; border-radius: 8px; margin: 20px 0;">
+  <h4>Workflow of JWT Token for Login, Registration, and Logout</h4>
+  <img src="https://github.com/user-attachments/assets/e1eb6218-7468-46e2-9c02-a52ed4d9966d" alt="JWT Authentication Flow" style="width: 100%; max-width: 800px; margin: 10px 0;">
+</div>
+
+---
+
+### Database Model Architecture
+<div style="padding: 20px; border: 2px solid #2ecc71; border-radius: 8px; margin: 20px 0;">
+  <h4>Database Schema and Model Relationships</h4>
+  <img src="https://github.com/user-attachments/assets/73d53fc9-b3d1-440e-99e0-b2f71a00bebc" alt="Database Model Architecture" style="width: 100%; max-width: 800px; margin: 10px 0;">
+</div>
+
+
+
 ## Tech Stack
 ### Frontend:
 - React.js
