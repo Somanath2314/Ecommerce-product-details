@@ -167,3 +167,11 @@ Project Link: [https://github.com/yourusername/front-flow](https://github.com/yo
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+(For self information)
+
+## Frontend URL
+Link: [https://front-flow-frontend-v1.vercel.app/]
+
+## Backend URL (Deployed on vercel with accnt btech1)
+Link: [https://vercel.com/somannas-projects/front-flow-v1]
