@@ -175,3 +175,9 @@ Link: [https://front-flow-frontend-v1.vercel.app/]
 
 ## Backend URL (Deployed on vercel with accnt btech1)
 Link: [https://vercel.com/somannas-projects/front-flow-v1]
+
+
+How we are handling the Security
+1. SQL injection: using bcrypting.
+2. XSS cross side scrypting: 
+3. CSRF: Cross side request forging: Sol is using csrf tokens and they are stored in the client side, 
